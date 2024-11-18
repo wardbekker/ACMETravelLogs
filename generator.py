@@ -15,7 +15,7 @@ class ACMETravelLogGenerator:
         self.api_key = api_key
         self.start_time = time.time()
         self.error_count = defaultdict(int)
-        self.otlp_url = f"https://otlp-gateway-prod-us-central-0.grafana.net/otlp/v1/logs"
+        self.otlp_url = os.getenv('OTLP_ENDPOINT', 'https://otlp-gateway-prod-us-central-0.grafana.net/otlp/v1/logs')
 
     def get_timestamp_ns(self):
         """Return current timestamp in nanoseconds"""
@@ -286,6 +286,7 @@ if __name__ == "__main__":
         print("Example usage:")
         print("export GRAFANA_INSTANCE_ID='your-instance-id'")
         print("export GRAFANA_API_KEY='your-api-key'")
+        print("export OTLP_ENDPOINT='your-otlp-endpoint' # Optional - defaults to Grafana Cloud endpoint")
         exit(1)
     
     generator = ACMETravelLogGenerator(instance_id, api_key)
