@@ -5,9 +5,13 @@ import requests
 from collections import defaultdict
 import math
 import os
+from dotenv import load_dotenv
 from opentelemetry.proto.logs.v1 import logs_pb2
 from opentelemetry.proto.common.v1 import common_pb2
 from opentelemetry.proto.resource.v1 import resource_pb2
+
+# Load environment variables from .env file
+load_dotenv()
 
 class ACMETravelLogGenerator:
     def __init__(self, instance_id, api_key):
